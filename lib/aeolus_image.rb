@@ -14,6 +14,7 @@
 
 require 'optparse'
 require 'logger'
+require 'active_resource'
 require File.join(File.dirname(__FILE__), 'aeolus_image/model/warehouse', 'warehouse_client') # Not sure we need this
 require File.join(File.dirname(__FILE__), 'aeolus_image/model/warehouse', 'warehouse_model')  # We may be able to factor this out?
 require File.join(File.dirname(__FILE__), 'aeolus_image/model/warehouse', 'image')
