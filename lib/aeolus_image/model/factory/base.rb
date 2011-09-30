@@ -3,6 +3,7 @@ module Aeolus
     module Factory
       class Base < ActiveResource::Base
         self.format = :json
+        self.ssl_options = {:verify_mode  => OpenSSL::SSL::VERIFY_NONE}
 
         class << self
           ## Remove format from the url for resources
