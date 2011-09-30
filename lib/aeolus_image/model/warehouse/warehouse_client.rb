@@ -21,7 +21,6 @@ require 'nokogiri'
 module Aeolus
   module Image
     module Warehouse
-
       class BucketObject
         attr_reader :key
 
@@ -174,7 +173,6 @@ module Aeolus
           @connection.do_request "/#{bucket_name}/_query", {:method => :post, :content => query_string}
         end
       end
-
     end
   end
 end
