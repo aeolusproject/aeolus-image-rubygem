@@ -1,10 +1,9 @@
 %global gemdir %(ruby -rubygems -e 'puts Gem::dir' 2>/dev/null)
 %global gemname aeolus-image
 %global geminstdir %{gemdir}/gems/%{gemname}-%{version}
-%global mandir %{_mandir}/man1
 %global rubyabi 1.8
 
-Summary: Command-line interface for working with the Aeolus cloud suite
+Summary: Ruby Client for interacting with Image Warehouse and Image Factory
 Name: rubygem-aeolus-image
 Version: 0.1.0
 Release: 3%{?extra_release}%{?dist}
@@ -34,7 +33,7 @@ BuildArch: noarch
 Provides: rubygem(%{gemname}) = %{version}
 
 %description
-QMF Console for Aeolus Image Factory
+Ruby Client for Image Warehouse and Image Factory
 
 %prep
 %setup -q -c -T
@@ -48,31 +47,21 @@ rm -rf %{buildroot}
 mkdir -p %{buildroot}%{gemdir}
 cp -a .%{gemdir}/* %{buildroot}%{gemdir}/
 
-mkdir -p %{buildroot}/%{_bindir}
-mv %{buildroot}%{gemdir}/bin/* %{buildroot}/%{_bindir}
-find %{buildroot}%{geminstdir}/bin -type f | xargs chmod 755
-rmdir %{buildroot}%{gemdir}/bin
 rm -rf %{buildroot}%{gemdir}/gems/%{gemname}-%{version}/.yardoc
-
-mkdir -p %{buildroot}%{mandir}
-mv %{buildroot}%{geminstdir}/man/* %{buildroot}%{mandir}
 
 %files
 %doc %{geminstdir}/COPYING
-%{_bindir}/aeolus-image
 %dir %{geminstdir}
 %{geminstdir}/Rakefile
-%{geminstdir}/bin
-%{geminstdir}/examples
 %{geminstdir}/lib
-%{geminstdir}/man
 %{geminstdir}/spec
-%doc %{gemdir}/doc/%{gemname}-%{version}
 %{gemdir}/cache/%{gemname}-%{version}.gem
 %{gemdir}/specifications/%{gemname}-%{version}.gemspec
-%{mandir}/*
 
 %changelog
+* Tue Sep 20 2011 Martyn Taylor  <mtaylor@redhat.com>  - 0.0.1-3
+- split out command line tools
+
 * Wed Jul 20 2011 Mo Morsi <mmorsi@redhat.com>  - 0.0.1-3
 - more updates to conform to fedora guidelines
 

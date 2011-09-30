@@ -33,10 +33,8 @@ spec = Gem::Specification.new do |s|
   s.email = 'jguiditt@redhat.com, mtaylor@redhat.com'
   s.license = 'ASL 2.0'
   s.homepage = 'http://aeolusproject.org'
-  s.executables << 'aeolus-image'
-  s.files = %w(Rakefile) + Dir.glob("{bin,lib,spec,examples,man}/**/*") + %w(COPYING)
+  s.files = %w(Rakefile) + Dir.glob("{lib,spec}/**/*") + %w(COPYING)
   s.require_path = "lib"
-  s.bindir = "bin"
   s.add_dependency('nokogiri', '>=0.4.0')
   s.add_dependency('rest-client')
   s.add_dependency('imagefactory-console', '>=0.4.0')
