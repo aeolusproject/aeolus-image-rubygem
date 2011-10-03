@@ -51,6 +51,7 @@ rm -rf %{buildroot}%{gemdir}/gems/%{gemname}-%{version}/.yardoc
 
 %files
 %doc %{geminstdir}/COPYING
+%doc %{gemdir}/doc/%{gemname}-%{version}
 %dir %{geminstdir}
 %{geminstdir}/Rakefile
 %{geminstdir}/lib
