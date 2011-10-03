@@ -31,6 +31,10 @@ module Aeolus
           true
         end
 
+        def id
+          uuid
+        end
+
         class << self
           attr_accessor :warehouse, :bucket, :bucket_name
 
