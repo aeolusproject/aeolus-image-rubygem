@@ -38,6 +38,20 @@ module Aeolus
               self.class.new.load(object_array)
             end
           end
+
+          # This approach does mean you're limited to one server at a time
+          def config
+            defined?(@@config) ? @@config : {}
+          end
+          def config=(conf={})
+            @@config = conf
+            self.site = @@config[:site]
+          end
+
+          # Should we use OAuth?
+          def use_oauth?
+            config[:consumer_key] && config[:consumer_secret] && config[:site]
+          end
         end
 
         ## Instance Methods: (modifying the ActiveRecord::CustomMethods).
