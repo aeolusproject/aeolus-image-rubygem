@@ -15,19 +15,5 @@
 $: << File.expand_path(File.join(File.dirname(__FILE__), "../lib/aeolus_image/model/"))
 
 require 'rubygems'
-require 'warehouse_client'
-require 'warehouse_model'
-require 'image'
-require 'image_build'
-require 'target_image'
-require 'provider_image'
-
-RSpec.configure do |config|
-  config.before(:all) do
-    Aeolus::Image::BaseCommand.class_eval do
-      def load_config
-        YAML::load(File.open(File.join(File.dirname(__FILE__), "/../examples/aeolus-cli")))
-      end
-    end
-  end
-end
+require File.join(File.dirname(__FILE__), '../lib', 'aeolus_image')
+require 'vcr_setup'

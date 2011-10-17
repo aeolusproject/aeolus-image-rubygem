@@ -6,18 +6,11 @@
 Summary: Ruby Client for interacting with Image Warehouse and Image Factory
 Name: rubygem-aeolus-image
 Version: 0.1.0
-Release: 3%{?extra_release}%{?dist}
+Release: 4%{?extra_release}%{?dist}
 Group: Development/Languages
 License: ASL 2.0
 URL: http://aeolusproject.org
 
-# The source for this packages was pulled from the upstream's git repo.
-# Use the following commands to generate the gem
-# git clone  git://git.fedorahosted.org/aeolus/conductor.git
-# git checkout next
-# cd services/image_factory/aeolus-image
-# rake gem
-# grab image_factory_console-0.0.1.gem from the pkg subdir
 Source0: %{gemname}-%{version}.gem
 
 Requires: ruby(abi) = %{rubyabi}
@@ -26,6 +19,9 @@ Requires: rubygem(nokogiri) >= 1.4.0
 Requires: rubygem(rest-client)
 Requires: rubygem(imagefactory-console) >= 0.4.0
 Requires: rubygem(oauth)
+Requires: rubygem(vcr)
+Requires: rubygem(webmock)
+Requires: rubygem(timecop)
 
 BuildRequires: ruby
 BuildRequires: rubygems
@@ -61,6 +57,10 @@ rm -rf %{buildroot}%{gemdir}/gems/%{gemname}-%{version}/.yardoc
 %{gemdir}/specifications/%{gemname}-%{version}.gemspec
 
 %changelog
+* Mon Oct 17 2011 Matt Wagner <matt.wagner@redhat.com> - 0.0.1-4
+- Adds OAuth support for Factory client
+- Add vcr and webmock dependencies
+
 * Tue Sep 20 2011 Martyn Taylor  <mtaylor@redhat.com>  - 0.0.1-3
 - split out command line tools
 
