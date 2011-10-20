@@ -16,6 +16,7 @@ require 'rubygems'
 
 require 'rest-client'
 require 'nokogiri'
+require 'oauth'
 
 #TODO: perform iwhd version-dependent URI mapping
 module Aeolus
@@ -134,7 +135,7 @@ module Aeolus
           opts[:plain]   ||= false
           opts[:headers] ||= {}
 
-          result = RestClient::Request.execute :method => opts[:method], :url => @uri + path, :payload => opts[:content], :headers => opts[:headers]
+          result = RestClient::Request.execute(:method => opts[:method], :url => @uri + path, :payload => opts[:content], :headers => opts[:headers])
 
           return Nokogiri::XML result unless opts[:plain]
           return result
@@ -173,6 +174,20 @@ module Aeolus
           @connection.do_request "/#{bucket_name}/_query", {:method => :post, :content => query_string}
         end
       end
+
+      # Set up a proc to sign requests before transmission
+      RestClient.add_before_execution_proc do |request, params|
+        if WarehouseModel.use_oauth?
+          consumer = OAuth::Consumer.new(
+            WarehouseModel.oauth_consumer_key,
+            WarehouseModel.oauth_consumer_secret,
+            :site => WarehouseModel.iwhd_url
+          )
+          access_token = OAuth::AccessToken.new(consumer)
+          access_token.sign!(request)
+        end
+      end
+
     end
   end
 end
