@@ -25,6 +25,7 @@ Requires: rubygems
 Requires: rubygem(nokogiri) >= 1.4.0
 Requires: rubygem(rest-client)
 Requires: rubygem(imagefactory-console) >= 0.4.0
+Requires: rubygem(oauth)
 
 BuildRequires: ruby
 BuildRequires: rubygems
