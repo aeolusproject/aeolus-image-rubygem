@@ -105,6 +105,30 @@ module Aeolus
             end
           end
 
+          def config
+            defined?(@@config) ? @@config : nil
+          end
+
+          def config=(conf)
+            @@config = conf
+          end
+
+          def use_oauth?
+            !!oauth_consumer_key && !!oauth_consumer_secret
+          end
+
+          def oauth_consumer_key
+            config[:iwhd][:oauth][:consumer_key] rescue nil
+          end
+
+          def oauth_consumer_secret
+            config[:iwhd][:oauth][:consumer_secret] rescue nil
+          end
+
+          def iwhd_url
+            config[:iwhd][:url]
+          end
+
           protected
           # Copy over entirely too much code to load the config file
           def load_config
