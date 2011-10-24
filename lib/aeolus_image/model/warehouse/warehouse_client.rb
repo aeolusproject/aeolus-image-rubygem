@@ -177,7 +177,7 @@ module Aeolus
 
       # Set up a proc to sign requests before transmission
       RestClient.add_before_execution_proc do |request, params|
-        if WarehouseModel.use_oauth?
+        if WarehouseModel.use_oauth? && WarehouseModel.iwhd_url && params[:url].match(WarehouseModel.iwhd_url)
           consumer = OAuth::Consumer.new(
             WarehouseModel.oauth_consumer_key,
             WarehouseModel.oauth_consumer_secret,
