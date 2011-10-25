@@ -11,18 +11,26 @@ After configurating Factory and/or Warehouse hosts, you can do things like the f
 
 ### Warehouse ###
 
+~~~
    images = Aeolus::Image::Warehouse::Image.all
    
    image1 = images.first
    image1.name # => ""
    image1.image_builds # => an array of ImageBuild objects
+~~~
 
 ### Factory ###
+
+~~~
    builds_in_progress = Aeolus::Image::Factory::Builder.all
+~~~
 
 #### Start a build with Factory ####
+
+~~~
    img = Aeolus::Image::Factory::Image.new(
     :targets => 'ec2',
     :template => IO.read('/home/mawagner/template.tpl')
    )
    img.save!
+~~~
