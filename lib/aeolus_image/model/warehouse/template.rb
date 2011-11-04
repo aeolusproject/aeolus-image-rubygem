@@ -16,8 +16,14 @@ module Aeolus
   module Image
     module Warehouse
       class Template < WarehouseModel
+        attr_reader :body
+
         @bucket_name = 'templates'
 
+        def initialize(obj)
+          super
+          @body = obj.body
+        end
       end
     end
   end
