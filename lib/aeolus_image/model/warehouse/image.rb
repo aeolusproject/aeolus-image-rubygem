@@ -20,17 +20,9 @@ module Aeolus
 
         @bucket_name = 'images'
 
-        def initialize(attrs)
-          attrs.each do |k,v|
-            if k.to_sym == :latest_build
-              sym = :attr_writer
-            else
-              sym = :attr_accessor
-            end
-            self.class.send(sym, k.to_sym) unless respond_to?(:"#{k}=")
-            send(:"#{k}=", v)
-          end
-          @xml_body = Nokogiri::XML @body
+        def initialize(obj)
+          super
+          @xml_body = Nokogiri::XML obj.body
         end
 
         def template_xml

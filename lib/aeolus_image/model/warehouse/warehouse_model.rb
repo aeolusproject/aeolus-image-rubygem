@@ -19,6 +19,14 @@ module Aeolus
       class BucketNotFound < Exception;end
 
       class WarehouseModel
+        def initialize(obj)
+          attrs = obj.attrs(obj.attr_list)
+          attrs.each do |k,v|
+            self.class.send(:attr_writer, k.to_sym) unless respond_to?(:"#{k}=")
+            self.class.send(:attr_reader, k.to_sym) unless respond_to?(k.to_sym)
+            send(:"#{k}=", v)
+          end
+        end
 
         def ==(other_obj)
           # If the objects have different instance variables defined, they're definitely not ==
@@ -60,17 +68,17 @@ module Aeolus
 
           def first
             obj = bucket_objects.first
-            obj ? self.new(obj.attrs(obj.attr_list)) : nil
+            obj ? self.new(obj) : nil
           end
 
           def last
             obj = bucket_objects.last
-            obj ? self.new(obj.attrs(obj.attr_list)) : nil
+            obj ? self.new(obj) : nil
           end
 
           def all
             bucket_objects.map do |wh_object|
-                self.new(wh_object.attrs(wh_object.attr_list))
+                self.new(wh_object)
             end
           end
 
@@ -78,7 +86,7 @@ module Aeolus
             self.set_warehouse_and_bucket if self.bucket.nil?
             begin
               if self.bucket.include?(uuid)
-                self.new(self.bucket.object(uuid).attrs(self.bucket.object(uuid).attr_list))
+                self.new(self.bucket.object(uuid))
               else
                 nil
               end

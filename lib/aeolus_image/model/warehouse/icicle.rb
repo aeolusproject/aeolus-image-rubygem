@@ -18,14 +18,6 @@ module Aeolus
       class Icicle < WarehouseModel
         @bucket_name = 'icicles'
 
-        def initialize(attrs)
-          attrs.each do |k,v|
-            sym = :attr_accessor
-            self.class.send(sym, k.to_sym) unless respond_to?(:"#{k}=")
-            send(:"#{k}=", v)
-          end
-        end
-
         def packages
           unless @packages
             begin
