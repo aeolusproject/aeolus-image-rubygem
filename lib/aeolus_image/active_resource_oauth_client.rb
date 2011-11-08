@@ -26,7 +26,9 @@ module ActiveResourceOAuthClient
     def request_with_oauth(method, path, *arguments)
       @oauth_config = Aeolus::Image::Factory::Base.config || {}
       # Take care to fall back to the standard request method if we don't have full OAuth credentials
-      request_without_oauth(method, path, *arguments) unless Aeolus::Image::Factory::Base.use_oauth?
+      unless Aeolus::Image::Factory::Base.use_oauth?
+        return request_without_oauth(method, path, *arguments)
+      end
       result = ActiveSupport::Notifications.instrument("request.active_resource") do |payload|
         payload[:method] = method
         payload[:request_uri] = "#{site.scheme}://#{site.host}:#{site.port}#{path}"
