@@ -17,3 +17,22 @@ $: << File.expand_path(File.join(File.dirname(__FILE__), "../lib/aeolus_image/mo
 require 'rubygems'
 require File.join(File.dirname(__FILE__), '../lib', 'aeolus_image')
 require 'vcr_setup'
+
+require 'rspec'
+require 'warehouse/warehouse_client'
+require 'warehouse/warehouse_model'
+require 'warehouse/image'
+require 'warehouse/image_build'
+require 'warehouse/target_image'
+require 'warehouse/provider_image'
+require 'warehouse/template'
+
+RSpec.configure do |config|
+  config.before(:all) do
+#    Aeolus::Image::BaseCommand.class_eval do
+#      def load_config
+#        YAML::load(File.open(File.join(File.dirname(__FILE__), "/../examples/aeolus-cli")))
+#      end
+#    end
+  end
+end
