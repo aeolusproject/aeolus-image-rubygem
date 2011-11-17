@@ -3,7 +3,11 @@ module Aeolus
     module Factory
       class ProviderImage < Base
         def self.status(id)
-          Aeolus::Image::Factory::Builder.find(id).status
+          begin
+            Aeolus::Image::Factory::Builder.find(id).status
+          rescue ActiveResource::ResourceNotFound
+            nil
+          end
         end
       end
     end
