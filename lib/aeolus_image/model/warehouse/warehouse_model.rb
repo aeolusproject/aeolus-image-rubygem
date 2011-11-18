@@ -19,13 +19,20 @@ module Aeolus
       class BucketNotFound < Exception;end
 
       class WarehouseModel
+        attr_writer :body
+
         def initialize(obj)
-          attrs = obj.attrs(obj.attr_list)
-          attrs.each do |k,v|
+          @obj = obj
+          @attrs = obj.attrs(obj.attr_list)
+          @attrs.each do |k,v|
             self.class.send(:attr_writer, k.to_sym) unless respond_to?(:"#{k}=")
             self.class.send(:attr_reader, k.to_sym) unless respond_to?(k.to_sym)
             send(:"#{k}=", v)
           end
+        end
+
+        def body
+          @obj.body
         end
 
         def ==(other_obj)
@@ -137,7 +144,14 @@ module Aeolus
             config[:iwhd][:url]
           end
 
+          def create!(key, body, attributes)
+            self.set_warehouse_and_bucket if self.bucket.nil?
+            obj = self.bucket.create_object(key, body, attributes)
+            self.new(obj)
+          end
+
           protected
+
           # Copy over entirely too much code to load the config file
           def load_config
             # TODO - Is this always the case? We should probably have /etc/aeolus-cli or something too?

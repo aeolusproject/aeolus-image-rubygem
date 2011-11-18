@@ -23,6 +23,11 @@ module Aeolus
         def initialize(obj)
           super
           @body = obj.body
+          @xml_body = Nokogiri::XML @body
+        end
+
+        def name
+          @name ||= @xml_body.xpath("/template/name").text
         end
       end
     end
