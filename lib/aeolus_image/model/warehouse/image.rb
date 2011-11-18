@@ -28,7 +28,12 @@ module Aeolus
         def template_xml
           unless @template_xml
             begin
-              @template_xml = Nokogiri::XML image_builds.first.target_images.first.target_template.body
+              # if an image is directly associated with template, use this
+              if @template
+                @template_xml = Template.find(@template).xml_body
+              else
+                @template_xml = Nokogiri::XML image_builds.first.target_images.first.target_template.body
+              end
             rescue
               @template_xml = Nokogiri::XML "<template></template>"
             end

@@ -16,7 +16,7 @@ module Aeolus
   module Image
     module Warehouse
       class Template < WarehouseModel
-        attr_reader :body
+        attr_reader :xml_body
 
         @bucket_name = 'templates'
 
