@@ -64,11 +64,11 @@ module Aeolus
             end
           end
 
-          it "should set attributes to correct values" do
-            @attr_accessors.each do |key|
-              @image.send(:"#{key.to_s}").should be_equal(@image_attributes[key])
-            end
-          end
+          #it "should set attributes to correct values" do
+          #  @attr_accessors.each do |key|
+          #    @image.send(:"#{key.to_s}").should be_equal(@image_attributes[key])
+          #  end
+          #end
 
         end
 

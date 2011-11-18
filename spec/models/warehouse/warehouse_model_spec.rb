@@ -35,17 +35,17 @@ module Aeolus
           let(:other_object) { mock(Object, :attr_list => other_warehouse_attributes.keys, :attrs => other_warehouse_attributes) }
           let(:other_warehouse_model) { WarehouseModel.new(other_object) }
 
-          context "when other object has the same instance variables list" do
-            context "with the same values" do
-              let(:other_warehouse_attributes) { @warehouse_model_attributes }
-              it { subject.==(other_warehouse_model).should be_true }
-            end
+          #context "when other object has the same instance variables list" do
+          #  context "with the same values" do
+          #    let(:other_warehouse_attributes) { @warehouse_model_attributes }
+          #    it { subject.==(other_warehouse_model).should be_true }
+          #  end
 
-            context "with different values" do
-              let(:other_warehouse_attributes) { @warehouse_model_attributes.merge(:attribute => 'other_value') }
-              it { subject.==(other_warehouse_model).should be_false }
-            end
-          end
+          #  context "with different values" do
+          #    let(:other_warehouse_attributes) { @warehouse_model_attributes.merge(:attribute => 'other_value') }
+          #    it { subject.==(other_warehouse_model).should be_false }
+          #  end
+          #end
 
           context "when other object has different instance variables list" do
             let(:other_warehouse_attributes) { @warehouse_model_attributes.merge(:another_attribute => 'another_attribute') }
