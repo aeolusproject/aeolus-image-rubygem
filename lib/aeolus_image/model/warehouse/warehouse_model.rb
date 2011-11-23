@@ -105,8 +105,14 @@ module Aeolus
           end
 
           def where(query_string)
-            self.set_warehouse_and_bucket if self.bucket.nil?
-            self.warehouse.query(@bucket_name, query_string)
+            begin
+              self.set_warehouse_and_bucket if self.bucket.nil?
+              self.warehouse.query(@bucket_name, query_string).xpath('/objects/object').map do |obj|
+                self.new(self.bucket.object(obj.at_xpath('./key/text()').to_s))
+              end
+            rescue RestClient::ResourceNotFound
+              []
+            end
           end
 
           def delete(uuid)

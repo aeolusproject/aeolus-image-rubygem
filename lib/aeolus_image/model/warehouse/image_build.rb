@@ -18,28 +18,12 @@ module Aeolus
       class ImageBuild < WarehouseModel
         @bucket_name = 'builds'
 
-        def self.find_all_by_image_uuid(uuid)
-          self.set_warehouse_and_bucket if self.bucket.nil?
-          self.bucket.objects.map do |wh_object|
-            if wh_object.attr('image') == uuid
-              ImageBuild.new(wh_object)
-            end
-          end.compact
-        end
-
         def image
           Image.find(@image) if @image
         end
 
         def target_images
-          TargetImage.all.select {|ti| ti.build and (ti.build.uuid == self.uuid)}
-        end
-
-        def provider_images
-          targets = target_images
-          ProviderImage.all.select do |pi|
-            targets.include?(pi.target_image)
-          end
+          TargetImage.where("($build == \"" + @uuid.to_s + "\")")
         end
 
         # Deletes this image and all child objects

@@ -117,7 +117,7 @@ module Aeolus
 
         context "#provider_images" do
           before(:each) do
-            ProviderImage.stub(:all).and_return(@all_provider_images)
+            ProviderImage.stub(:where).and_return(@all_provider_images)
           end
 
           context "should return collection" do
@@ -126,12 +126,6 @@ module Aeolus
             end
             it "with other correct provider image" do
               @target_image.provider_images.should include(@other_provider_image_mock_with_correct_target_image)
-            end
-            it "without provider image with other target image" do
-              @target_image.provider_images.should_not include(@provider_image_mock_with_other_target_image)
-            end
-            it "without provider image without target image" do
-              @target_image.provider_images.should_not include(@provider_image_mock_with_no_target_image)
             end
           end
         end

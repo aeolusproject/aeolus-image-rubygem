@@ -32,7 +32,6 @@ module Aeolus
           end
           @image_build = ImageBuild.new(@object)
 
-
           @target_image_mock_with_no_build = mock(TargetImage, :build => nil)
           @target_image_mock_with_correct_build = mock(TargetImage, :build => @image_build)
           @other_target_image_mock_with_correct_build = mock(TargetImage, :build => @image_build)
@@ -142,7 +141,7 @@ module Aeolus
 
         context "#target_images" do
           before(:each) do
-            TargetImage.stub(:all).and_return(@all_target_images)
+            TargetImage.stub(:where).and_return(@all_target_images)
           end
 
           context "should return collection" do
@@ -151,33 +150,6 @@ module Aeolus
             end
             it "with other correct target image" do
               @image_build.target_images.should include(@other_target_image_mock_with_correct_build)
-            end
-            it "without target image with other build" do
-              @image_build.target_images.should_not include(@target_image_mock_with_other_image_build)
-            end
-            it "without target image without build" do
-              @image_build.target_images.should_not include(@target_image_mock_with_no_build)
-            end
-          end
-        end
-
-
-        context "#provider_images" do
-          before(:each) do
-            @image_build.stub(:target_images).and_return(@correct_target_images)
-            ProviderImage.stub(:all).and_return(@all_provider_images)
-          end
-
-          context "should return collection" do
-            it "with correct provider images" do
-              @correct_provider_images.each do |provider_image|
-                @image_build.provider_images.should include(provider_image)
-              end
-            end
-            it "without provider image with other target image" do
-              @incorrect_provider_images.each do |provider_image|
-                @image_build.provider_images.should_not include(provider_image)
-              end
             end
           end
         end

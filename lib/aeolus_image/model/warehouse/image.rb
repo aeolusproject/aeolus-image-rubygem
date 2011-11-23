@@ -46,7 +46,7 @@ module Aeolus
         end
 
         def image_builds
-          ImageBuild.find_all_by_image_uuid(@uuid)
+          ImageBuild.where("($image == \"" + @uuid.to_s + "\")")
         end
 
         #TODO: We should get the image fields from the object body once we have it defined.

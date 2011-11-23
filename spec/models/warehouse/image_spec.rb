@@ -202,19 +202,6 @@ module Aeolus
           end
         end
 
-        context "#image_builds" do
-
-          before(:each) do
-            ImageBuild.stub(:find_all_by_image_uuid)
-          end
-
-          it "should call ImageBuild.find_all_by_image_uuid with @uuid" do
-            ImageBuild.should_receive(:find_all_by_image_uuid).with(@image.instance_variable_get(:@uuid))
-            @image.image_builds
-          end
-
-        end
-
         context "#delete!" do
 
           before(:each) do

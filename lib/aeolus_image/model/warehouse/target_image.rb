@@ -23,7 +23,7 @@ module Aeolus
         end
 
         def provider_images
-          ProviderImage.all.select{|pi| pi.target_image and (pi.target_image.uuid == self.uuid)}
+          ProviderImage.where("($target_image == \"" + @uuid.to_s + "\")")
         end
 
         def target_template
