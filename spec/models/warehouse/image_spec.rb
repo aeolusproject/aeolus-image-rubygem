@@ -87,9 +87,21 @@ module Aeolus
             before(:each) do
               @target_template = mock(Template, :body => @template_xml.to_s)
               @target_image = [ mock(TargetImage, :target_template => @target_template) ]
-              @image_builds = [ mock(ImageBuild, :target_images => @target_image) ]
+              @image_builds = [ mock(ImageBuild, :target_images => @target_image, :provider_images => [mock(ProviderImage)] * 2) ] * 2
               @image.stub(:image_builds).and_return(@image_builds)
             end
+
+        context "#provider_images" do
+          before(:each) do
+            ImageBuild.stub(:where).and_return(@image_builds)
+          end
+
+          context "should return collection" do
+            it "with correct amount of provider images" do
+              @image.provider_images.size.should == 4
+            end
+          end
+        end
 
             # TODO: There shoud be a way to test equality of Nokogiri::XML documents better than string comparison
             it "should return correct template" do

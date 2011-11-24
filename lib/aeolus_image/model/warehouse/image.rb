@@ -49,6 +49,15 @@ module Aeolus
           ImageBuild.where("($image == \"" + @uuid.to_s + "\")")
         end
 
+        # Return all Provider Images associated with this Image
+        def provider_images
+          provider_images = []
+          image_builds.each do |b|
+            provider_images = provider_images + b.provider_images
+          end
+          provider_images
+        end
+
         #TODO: We should get the image fields from the object body once we have it defined.
         def name
           unless @name

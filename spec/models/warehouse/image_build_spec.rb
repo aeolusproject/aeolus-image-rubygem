@@ -32,9 +32,9 @@ module Aeolus
           end
           @image_build = ImageBuild.new(@object)
 
-          @target_image_mock_with_no_build = mock(TargetImage, :build => nil)
-          @target_image_mock_with_correct_build = mock(TargetImage, :build => @image_build)
-          @other_target_image_mock_with_correct_build = mock(TargetImage, :build => @image_build)
+          @target_image_mock_with_no_build = mock(TargetImage, :build => nil, :provider_images => [mock(ProviderImage)])
+          @target_image_mock_with_correct_build = mock(TargetImage, :build => @image_build, :provider_images => [mock(ProviderImage)])
+          @other_target_image_mock_with_correct_build = mock(TargetImage, :build => @image_build, :provider_images => [mock(ProviderImage)])
 
           @other_image_build_attributes = @image_build_attributes.merge(:uuid => 'other_uuid')
           @other_object = mock(Object, :attr_list => @other_image_build_attributes.keys, :attrs => @other_image_build_attributes)
@@ -43,7 +43,7 @@ module Aeolus
           end
           @other_image_build = ImageBuild.new(@other_object)
 
-          @target_image_mock_with_other_image_build = mock(TargetImage, :build => @other_image_build)
+          @target_image_mock_with_other_image_build = mock(TargetImage, :build => @other_image_build, :provider_images => [mock(ProviderImage)] * 2)
 
           @all_target_images = [ @target_image_mock_with_no_build, @target_image_mock_with_correct_build, @other_target_image_mock_with_correct_build, @target_image_mock_with_other_image_build ]
 
@@ -150,6 +150,18 @@ module Aeolus
             end
             it "with other correct target image" do
               @image_build.target_images.should include(@other_target_image_mock_with_correct_build)
+            end
+          end
+        end
+
+        context "#provider_images" do
+          before(:each) do
+            TargetImage.stub(:where).and_return(@all_target_images)
+          end
+
+          context "should return collection" do
+            it "with correct amount of provider images" do
+              @image_build.provider_images.size.should == 5
             end
           end
         end

@@ -26,6 +26,15 @@ module Aeolus
           TargetImage.where("($build == \"" + @uuid.to_s + "\")")
         end
 
+        # Convenience Method to get all provider images for this build
+        def provider_images
+          provider_images = []
+          target_images.each do |t|
+            provider_images = provider_images + t.provider_images
+          end
+          provider_images
+        end
+
         # Deletes this image and all child objects
         def delete!
           begin
