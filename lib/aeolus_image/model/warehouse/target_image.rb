@@ -40,6 +40,13 @@ module Aeolus
           end
           TargetImage.delete(@uuid)
         end
+
+        def find_provider_image_by_provider_and_account(provider, provider_account)
+          conditions = ["$target_image == \"#{@uuid}\""]
+          conditions << "$provider == \"#{provider}\"" if provider
+          conditions << "$provider_account_identifier == \"#{provider_account}\"" if provider_account
+          ProviderImage.where('(' + conditions.join(' && ') + ')')
+        end
       end
     end
   end

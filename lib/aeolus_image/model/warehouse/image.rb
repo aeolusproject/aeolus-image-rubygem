@@ -45,6 +45,15 @@ module Aeolus
           ImageBuild.find(@latest_build) if @latest_build
         end
 
+        def latest_pushed_or_unpushed_build
+          build = @latest_build ? ImageBuild.find(@latest_build) : nil
+          push = @latest_unpushed ? ImageBuild.find(@latest_unpushed) : nil
+          if build and push
+            return push.timestamp > build.timestamp ? push : build
+          end
+          return build || push || nil
+        end
+
         def image_builds
           ImageBuild.where("($image == \"" + @uuid.to_s + "\")")
         end
