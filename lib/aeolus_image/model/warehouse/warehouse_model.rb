@@ -154,6 +154,17 @@ module Aeolus
 
           def create!(key, body, attributes)
             self.set_warehouse_and_bucket if self.bucket.nil?
+            unless self.warehouse.buckets.include?(self.bucket.name)
+              begin
+                self.bucket = self.warehouse.create_bucket(self.bucket.name)
+              rescue
+                # there was an iwhd bug ago - it wasn't possible to find out
+                # if a bucket exists or not, then code 500 was returned.
+                # I'm not sure if it's already fixed or not so I'm wrapping it
+                # with rescue block. If exception is raised we can assume
+                # that bucket already exists.
+              end
+            end
             obj = self.bucket.create_object(key, body, attributes)
             self.new(obj)
           end
