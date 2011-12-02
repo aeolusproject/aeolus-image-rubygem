@@ -6,7 +6,7 @@
 Summary: Ruby Client for interacting with Image Warehouse and Image Factory
 Name: rubygem-aeolus-image
 Version: 0.2.0
-Release: 0%{?extra_release}%{?dist}
+Release: 1%{?extra_release}%{?dist}
 Group: Development/Languages
 License: ASL 2.0
 URL: http://aeolusproject.org
@@ -57,6 +57,25 @@ rm -rf %{buildroot}%{gemdir}/gems/%{gemname}-%{version}/.yardoc
 %{gemdir}/specifications/%{gemname}-%{version}.gemspec
 
 %changelog
+* Thu Dec  1 2011 Steve Linabery <slinaber@redhat.com> - 0.2.0-1
+- d451628 Fixed creation of a bucket when saving a bucket object
+- 289dcbf Added builder helper methods
+- 4f708c8 Added couple of helper methods to image model
+- 6ae089c Added convenience methods for checking providerimages on image/build
+- 90154e0 Updated models to use iwhd query syntax
+- 1cba777 Fixed comparing of two warehouse objects
+- 2e2d735 Commented out couple of tests
+- 4b6408d Updated fetching of template for an image
+- 424c117 Added create method and enabled access to body
+- dd829cd BZ#752494 Handle 404 for status in rubygem
+- 5d4cdc0 Add tests for aeolus-image-rubygem
+- 0706f29 Fixed request_without_oauth method
+- a121b34 Fixed template body initialize
+- 105420b Updated warehouse models initialize method and fixed image body
+- cd55966 adding icicle support
+- 3aa588a Fixes formatting of README.md
+- 0cf1a58 Adds README file
+
 * Tue Nov 29 2011 Steve Linabery <slinaber@redhat.com> - 0.2.0-0
 - Bump release, set version to 0
 
