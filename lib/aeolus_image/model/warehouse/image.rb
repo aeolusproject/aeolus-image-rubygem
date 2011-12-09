@@ -25,6 +25,7 @@ module Aeolus
           @xml_body = Nokogiri::XML obj.body
         end
 
+        # This can now return nil
         def template_xml
           unless @template_xml
             begin
@@ -35,7 +36,7 @@ module Aeolus
                 @template_xml = Nokogiri::XML image_builds.first.target_images.first.target_template.body
               end
             rescue
-              @template_xml = Nokogiri::XML "<template></template>"
+              @template_xml = nil
             end
           end
           @template_xml
@@ -80,14 +81,14 @@ module Aeolus
 
         def os
           unless @os
-            @os = OS.new(template_xml.xpath("/template/os/name").text, template_xml.xpath("/template/os/version").text, template_xml.xpath("/template/os/arch").text)
+            @os = OS.new(template_xpath("/template/os/name"), template_xpath("/template/os/version"), template_xpath("/template/os/arch"))
           end
           @os
         end
 
         def description
           unless @description
-            @description = template_xml.xpath("/template/description").text
+            @description = template_xpath("/template/description")
           end
           @description
         end
@@ -101,6 +102,18 @@ module Aeolus
           rescue NoMethodError
           end
           Image.delete(@uuid)
+        end
+
+        # No template is created on imported images
+        def imported?
+          !self.respond_to?(:template)
+        end
+
+        # template_xml.xpath(PATH).text => template_xpath(PATH)
+        # Rescues exceptions and returns an empty string if necessary
+        def template_xpath(path)
+          xml = template_xml
+          xml.present? ? xml.xpath(path).text : ""
         end
       end
     end
