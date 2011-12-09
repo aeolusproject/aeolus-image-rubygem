@@ -52,6 +52,19 @@ module Aeolus
           uuid
         end
 
+        # Returns the bucket object represending this object
+        def bucket_object
+          @obj
+        end
+
+        # Set (and immediately update) an attribute on the object
+        # TODO: It might be nicer to offer a .save! that iterates over each attribute
+        # and calls this, to better match ActiveResource
+        def set_attr(key, value)
+          bucket_object.set_attr(key, value)
+        end
+
+
         class << self
           attr_accessor :warehouse, :bucket, :bucket_name
 
