@@ -106,7 +106,7 @@ module Aeolus
 
         # No template is created on imported images
         def imported?
-          !self.respond_to?(:template)
+          !@template
         end
 
         # template_xml.xpath(PATH).text => template_xpath(PATH)
