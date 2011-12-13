@@ -17,9 +17,19 @@ module Aeolus
   module Image
     module Factory
       class TargetImage < Base
+        attr_accessor :target
+
         def self.status(id)
           begin
             Aeolus::Image::Factory::Builder.find(id).status
+          rescue ActiveResource::ResourceNotFound
+            nil
+          end
+        end
+
+        def target
+          begin
+            @target = @target.nil? ? Aeolus::Image::Factory::Builder.find(id).target : @target
           rescue ActiveResource::ResourceNotFound
             nil
           end
