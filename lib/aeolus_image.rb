@@ -31,3 +31,5 @@ require File.join(File.dirname(__FILE__), 'aeolus_image/model/factory', 'provide
 require File.join(File.dirname(__FILE__), 'aeolus_image/model/factory', 'target_image')
 require File.join(File.dirname(__FILE__), 'aeolus_image/model/factory', 'builder')
 require File.join(File.dirname(__FILE__), 'aeolus_image', 'active_resource_oauth_client')
+
+require File.join(File.dirname(__FILE__), 'aeolus_image', 'import')
