@@ -57,6 +57,17 @@ rm -rf %{buildroot}%{gemdir}/gems/%{gemname}-%{version}/.yardoc
 %{gemdir}/specifications/%{gemname}-%{version}.gemspec
 
 %changelog
+* Wed Jan 04 2012 Steve Linabery <slinaber@redhat.com> - 0.3.0-1
+- c13b654 Changes to build behavior in rpmtask.rb, Rakefile
+- dd1bab7 Create an Aeolus::Image.import method
+- 9b6cfd2 Fix a bug with repeat invocations of .imported?
+- d1d97b0 WarehouseModel objects now implement a set_attr instance method.
+- 68aa3fb Adds imported? method to Warehouse::Image
+- 8a65b83 BZ#753917 Added Target to Builder
+- 64c2ac5 Added ASL license header to files
+- 0132975 Bump version for ongoing development on master branch
+- 74dba63 Bump release for 0.2.0 RC
+
 * Thu Dec  1 2011 Steve Linabery <slinaber@redhat.com> - 0.2.0-1
 - d451628 Fixed creation of a bucket when saving a bucket object
 - 289dcbf Added builder helper methods
