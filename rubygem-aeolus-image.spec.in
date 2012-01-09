@@ -6,7 +6,7 @@
 Summary: Ruby Client for interacting with Image Warehouse and Image Factory
 Name: rubygem-aeolus-image
 Version: @VERSION@
-Release: 0%{?dist}
+Release: 1%{?dist}
 Group: Development/Languages
 License: ASL 2.0
 URL: http://aeolusproject.org
@@ -57,6 +57,12 @@ rm -rf %{buildroot}%{gemdir}/gems/%{gemname}-%{version}/.yardoc
 %{gemdir}/specifications/%{gemname}-%{version}.gemspec
 
 %changelog
+* Mon Jan 09 2012 Steve Linabery <slinaber@redhat.com> - 0.4.0-1
+- d0624e1 Add provider_account-filtered 'provider images' method to build model
+- 8108b42 Remove extra_release from spec.in
+- fc06460 Bump version
+- 2e7977a Add Changelog entry for 0.3.0-1
+
 * Wed Jan 04 2012 Steve Linabery <slinaber@redhat.com> - 0.3.0-1
 - c13b654 Changes to build behavior in rpmtask.rb, Rakefile
 - dd1bab7 Create an Aeolus::Image.import method
