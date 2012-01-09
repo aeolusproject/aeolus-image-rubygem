@@ -24,7 +24,7 @@ require 'rake/rpmtask'
 RPMBUILD_DIR = "#{File.expand_path('~')}/rpmbuild"
 RPM_SPEC = "rubygem-aeolus-image.spec"
 RPM_SPEC_IN = "rubygem-aeolus-image.spec.in"
-PKG_VERSION = "0.5.0"
+PKG_VERSION = "0.4.0"
 
 spec = Gem::Specification.new do |s|
   s.name = 'aeolus-image'
