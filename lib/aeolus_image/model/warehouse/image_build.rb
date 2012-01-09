@@ -34,6 +34,15 @@ module Aeolus
           end
           provider_images
         end
+        def provider_images_by_provider_and_account(provider, provider_account)
+          provider_images = []
+          target_images.each do |t|
+            provider_images = provider_images +
+              t.find_provider_image_by_provider_and_account(provider,
+                                                            provider_account)
+          end
+          provider_images
+        end
 
         # Deletes this image and all child objects
         def delete!
