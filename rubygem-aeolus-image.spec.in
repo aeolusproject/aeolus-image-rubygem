@@ -57,7 +57,7 @@ rm -rf %{buildroot}%{gemdir}/gems/%{gemname}-%{version}/.yardoc
 %{gemdir}/specifications/%{gemname}-%{version}.gemspec
 
 %changelog
-* Mon Jan 09 2012 Steve Linabery <slinaber@redhat.com> - 0.4.0-1
+* Mon Jan 09 2012 Steve Linabery <slinaber@redhat.com> - 0.3.0-2
 - d0624e1 Add provider_account-filtered 'provider images' method to build model
 - 8108b42 Remove extra_release from spec.in
 - fc06460 Bump version
