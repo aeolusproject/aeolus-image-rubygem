@@ -20,7 +20,7 @@ module Aeolus
         ACTIVE_STATES = ['FAILED', 'COMPLETED']
 
         def find_active_build(build_id, target)
-          builders.find {|b| !ACTIVE_STATES.include?(b.status) && b.operation == 'build' && b.build_id == build_id}
+          builders.find {|b| !ACTIVE_STATES.include?(b.status) && b.operation == 'build' && b.build_id == build_id && b.target == target}
         end
 
         def find_active_push(target_image_id, provider, account)
