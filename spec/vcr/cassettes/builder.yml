@@ -1,0 +1,24 @@
+--- 
+- !ruby/struct:VCR::HTTPInteraction 
+  request: !ruby/struct:VCR::Request 
+    method: :get
+    uri: http://127.0.0.1:8075/imagefactory/builders
+    body: 
+    headers: 
+      accept: 
+      - application/json
+  response: !ruby/struct:VCR::Response 
+    status: !ruby/struct:VCR::ResponseStatus 
+      code: 200
+      message: OK
+    headers: 
+      content-type: 
+      - application/json
+      server: 
+      - PasteWSGIServer/0.5 Python/2.7.2
+      date: 
+      - Tue, 17 Jan 2012 14:19:33 GMT
+      content-length: 
+      - "512"
+    body: "{\"_type\": \"builders\", \"href\": \"http://127.0.0.1:8075/imagefactory/builders\", \"builders\": [{\"status\": \"PENDING\", \"_type\": \"builder\", \"completed\": 20, \"provider_account_identifier\": null, \"image_id\": \"4d6da4b2-3de1-11e1-90a4-5254001901e4\", \"href\": \"http://127.0.0.1:8075/imagefactory/builders/fba47ca6-dcde-438d-84b4-b40b8a2413af\", \"operation\": \"build\", \"id\": \"fba47ca6-dcde-438d-84b4-b40b8a2413af\", \"build_id\": \"93423694-421c-40f6-80b3-8997758d9241\", \"target\": \"mock\", \"provider\": null, \"target_image_id\": null}]}"
+    http_version: "1.1"

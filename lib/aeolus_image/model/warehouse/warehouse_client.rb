@@ -126,6 +126,14 @@ module Aeolus
 
         def initialize(uri)
           @uri = uri
+          if WarehouseModel.use_oauth? && WarehouseModel.iwhd_url && uri.match(WarehouseModel.iwhd_url)
+            @consumer = OAuth::Consumer.new(
+              WarehouseModel.oauth_consumer_key,
+              WarehouseModel.oauth_consumer_secret,
+              :site => WarehouseModel.iwhd_url
+            )
+            @token = OAuth::AccessToken.new(@consumer)
+          end
         end
 
         def do_request(path = '', opts={})
@@ -134,7 +142,13 @@ module Aeolus
           opts[:plain]   ||= false
           opts[:headers] ||= {}
 
-          result = RestClient::Request.execute(:method => opts[:method], :url => @uri + path, :payload => opts[:content], :headers => opts[:headers])
+          # Using restclient seems to break OAuth POSTs, so use the oauth gem directly if we're using OAuth:
+          if @token
+            # TODO - I'm not sure how to pass :headers through here, but we don't actually use them anywhere
+            result = @token.request(opts[:method], (@uri + path).to_s, opts[:content].to_s).body
+          else
+            result = RestClient::Request.execute(:method => opts[:method], :url => @uri + path, :payload => opts[:content], :headers => opts[:headers])
+          end
 
           return Nokogiri::XML result unless opts[:plain]
           return result
@@ -173,20 +187,6 @@ module Aeolus
           @connection.do_request "/#{bucket_name}/_query", {:method => :post, :content => query_string}
         end
       end
-
-      # Set up a proc to sign requests before transmission
-      RestClient.add_before_execution_proc do |request, params|
-        if WarehouseModel.use_oauth? && WarehouseModel.iwhd_url && params[:url].match(WarehouseModel.iwhd_url)
-          consumer = OAuth::Consumer.new(
-            WarehouseModel.oauth_consumer_key,
-            WarehouseModel.oauth_consumer_secret,
-            :site => WarehouseModel.iwhd_url
-          )
-          access_token = OAuth::AccessToken.new(consumer)
-          access_token.sign!(request)
-        end
-      end
-
     end
   end
 end
