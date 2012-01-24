@@ -21,7 +21,12 @@ module Aeolus
 
         def self.status(id)
           begin
-            Aeolus::Image::Factory::Builder.find(id).status
+            builder = Aeolus::Image::Factory::Builder.find(id)
+            if builder.operation == "build"
+              builder.status
+            else
+              nil
+            end
           rescue ActiveResource::ResourceNotFound
             nil
           end
