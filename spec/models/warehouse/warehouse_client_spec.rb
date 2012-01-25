@@ -333,7 +333,7 @@ module Aeolus
           context "with no parameters" do
 
             it "should call RestClient::Request.execute with meaningful defaults" do
-              RestClient::Request.should_receive(:execute).with(:method => :get, :url => uri + '', :payload => '', :headers => {})
+              RestClient::Request.should_receive(:execute).with(:method => :get, :url => uri + '/', :payload => '', :headers => {})
               subject.do_request()
             end
           end
