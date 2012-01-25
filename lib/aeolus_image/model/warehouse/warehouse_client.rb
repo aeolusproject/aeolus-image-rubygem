@@ -136,7 +136,7 @@ module Aeolus
           end
         end
 
-        def do_request(path = '', opts={})
+        def do_request(path = '/', opts={})
           opts[:method]  ||= :get
           opts[:content] ||= ''
           opts[:plain]   ||= false
