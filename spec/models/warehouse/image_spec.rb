@@ -79,7 +79,7 @@ module Aeolus
             @template_xml = Nokogiri::XML(@body)
 
             @empty_body = "<template></template>"
-            @empty_tempalte_xml = Nokogiri::XML(@empty_body)
+            @empty_template_xml = nil
           end
 
           context "with correct associated objects" do
@@ -118,7 +118,7 @@ module Aeolus
 
             # TODO: There shoud be a way to test equality of Nokogiri::XML documents better than string comparison
             it "should return empty template" do
-              @image.template_xml.to_s.should be_eql(@empty_tempalte_xml.to_s)
+              @image.template_xml.to_s.should be_eql(@empty_template_xml.to_s)
             end
           end
         end
