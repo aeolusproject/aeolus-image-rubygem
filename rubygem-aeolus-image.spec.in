@@ -6,7 +6,7 @@
 Summary: Ruby Client for interacting with Image Warehouse and Image Factory
 Name: rubygem-aeolus-image
 Version: @VERSION@
-Release: 3%{?dist}
+Release: 4%{?dist}
 Group: Development/Languages
 License: ASL 2.0
 URL: http://aeolusproject.org
@@ -57,6 +57,10 @@ rm -rf %{buildroot}%{gemdir}/gems/%{gemname}-%{version}/.yardoc
 %{gemdir}/specifications/%{gemname}-%{version}.gemspec
 
 %changelog
+* Wed Jan 25 2012 Steve Linabery <slinaber@redhat.com> - 0.3.0-4
+- b8f9a25 BZ 783028 - empty request path
+- 9ff2125 Correct failing test and typo
+
 * Wed Jan 18 2012 Steve Linabery <slinaber@redhat.com> - 0.3.0-3
 - 62d8e10 BZ 782097 - find_active_build now respects 'target' param
 - 67fdf6f Use oauth gem directly for signing OAuth requests
