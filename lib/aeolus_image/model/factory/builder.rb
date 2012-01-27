@@ -23,6 +23,10 @@ module Aeolus
           builders.find {|b| !ACTIVE_STATES.include?(b.status) && b.operation == 'build' && b.build_id == build_id && b.target == target}
         end
 
+        def find_active_build_by_imageid(image_id, target)
+          builders.find {|b| !ACTIVE_STATES.include?(b.status) && b.operation == 'build' && b.image_id == image_id && b.target == target}
+        end
+
         def find_active_push(target_image_id, provider, account)
           builders.find {|b| !ACTIVE_STATES.include?(b.status) && b.operation == 'push' && b.target_image_id == target_image_id &&
                               b.provider == provider && b.provider_account_identifier == account}
