@@ -31,6 +31,15 @@ module Aeolus
           builders.find {|b| !ACTIVE_STATES.include?(b.status) && b.operation == 'push' && b.target_image_id == target_image_id &&
                               b.provider == provider && b.provider_account_identifier == account}
         end
+
+        def failed_build_count(build_id, target)
+          builders.count {|b| b.status == 'FAILED' && b.operation == 'build' && b.build_id == build_id && b.target == target}
+        end
+
+        def failed_push_count(target_image_id, provider, account)
+          builders.count {|b| b.status == 'FAILED' && b.operation == 'push' && b.target_image_id == target_image_id &&
+                              b.provider == provider && b.provider_account_identifier == account}
+        end
       end
     end
   end
