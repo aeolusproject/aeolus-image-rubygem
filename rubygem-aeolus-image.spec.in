@@ -6,7 +6,7 @@
 Summary: Ruby Client for interacting with Image Warehouse and Image Factory
 Name: rubygem-aeolus-image
 Version: @VERSION@
-Release: 5%{?dist}
+Release: 6%{?dist}
 Group: Development/Languages
 License: ASL 2.0
 URL: http://aeolusproject.org
@@ -56,6 +56,10 @@ rm -rf %{buildroot}%{gemdir}/gems/%{gemname}-%{version}/.yardoc
 %{gemdir}/specifications/%{gemname}-%{version}.gemspec
 
 %changelog
+* Mon Jan 30 2012 Steve Linabery <slinaber@redhat.com> - 0.3.0-6
+- 93af12e Remove dependency on console gem, which we no longer use.
+- b459e42 BZ781482: Adds failed build/push count to Factory::Builder
+
 * Thu Jan 26 2012 Steve Linabery <slinaber@redhat.com> - 0.3.0-5
 - 005cdfe BZ#783366 Check Operation on Status Call
 - e57aaa4 BZ 770358 - Added method find_active_build_by_imageid method
