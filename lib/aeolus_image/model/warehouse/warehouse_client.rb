@@ -145,15 +145,24 @@ module Aeolus
           # Using restclient seems to break OAuth POSTs, so use the oauth gem directly if we're using OAuth:
           if @token
             # TODO - I'm not sure how to pass :headers through here, but we don't actually use them anywhere
-            result = @token.request(opts[:method], (@uri + path).to_s, opts[:content].to_s).body
-          else
+            response = @token.request(opts[:method], (@uri + path).to_s, opts[:content].to_s)
+            # Errors don't cause exceptions like they do with RestClient, so detect and raise them:
+            if response.is_a?(Net::HTTPSuccess)
+              result = response.body
+            # Translate a few common errors to their RestClient counterparts that we're used to checking for:
+            elsif response.is_a?(Net::HTTPNotFound)
+              raise RestClient::ResourceNotFound
+            elsif response.is_a?(Net::HTTPInternalServerError)
+              raise RestClient::InternalServerError
+            # Otherwise, raise the error:
+            else
+              response.error!
+            end
+          else # no @token -- use RestClient
             result = RestClient::Request.execute(:method => opts[:method], :url => @uri + path, :payload => opts[:content], :headers => opts[:headers])
           end
-
-          return Nokogiri::XML result unless opts[:plain]
-          return result
+          return opts[:plain] ? result : Nokogiri::XML(result)
         end
-
       end
 
       class Client
@@ -163,7 +172,7 @@ module Aeolus
         end
 
         def create_bucket(bucket)
-          @connection.do_request "/#{bucket}", :method => :put rescue RestClient::InternalServerError
+          @connection.do_request("/#{bucket}", :method => :put) rescue RestClient::InternalServerError
           Bucket.new(bucket, @connection)
         end
 
