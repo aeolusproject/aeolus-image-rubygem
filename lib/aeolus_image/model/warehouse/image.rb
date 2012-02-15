@@ -93,6 +93,10 @@ module Aeolus
           @description
         end
 
+        def environment
+          @environment
+        end
+
         # Delete this image and all child objects
         def delete!
           begin
@@ -114,6 +118,12 @@ module Aeolus
         def template_xpath(path)
           xml = template_xml
           xml.present? ? xml.xpath(path).text : ""
+        end
+
+        class << self
+          def by_environment(environment)
+            self.where("($environment == \"" + environment + "\")")
+          end
         end
       end
     end
