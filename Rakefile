@@ -29,8 +29,8 @@ PKG_VERSION = "0.4.0"
 spec = Gem::Specification.new do |s|
   s.name = 'aeolus-image'
   s.version = PKG_VERSION
-  s.summary= 'cli for aeolus cloud suite'
-  s.description = 'Commandline interface for working with the aeolus cloud management suite'
+  s.summary= 'Ruby Client for Image Warehouse and Image Factory for the Aeolus cloud suite'
+  s.description = 'Library for managing image via the Factory and Warehouse projects for the aeolus cloud management suite'
   s.author = 'Jason Guiditta, Martyn Taylor'
   s.email = 'jguiditt@redhat.com, mtaylor@redhat.com'
   s.license = 'ASL 2.0'
@@ -39,6 +39,8 @@ spec = Gem::Specification.new do |s|
   s.require_path = "lib"
   s.add_dependency('nokogiri', '>=0.4.0')
   s.add_dependency('rest-client')
+  s.add_dependency('activeresource', '~>3.0.10')
+  s.add_dependency('oauth')
 
   s.add_development_dependency('rspec', '~>1.3.0')
 end
