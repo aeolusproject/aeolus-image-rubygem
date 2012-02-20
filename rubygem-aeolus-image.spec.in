@@ -6,7 +6,7 @@
 Summary: Ruby Client for interacting with Image Warehouse and Image Factory
 Name: rubygem-aeolus-image
 Version: @VERSION@
-Release: 7%{?dist}
+Release: 8%{?dist}
 Group: Development/Languages
 License: ASL 2.0
 URL: http://aeolusproject.org
@@ -56,6 +56,11 @@ rm -rf %{buildroot}%{gemdir}/gems/%{gemname}-%{version}/.yardoc
 %{gemdir}/specifications/%{gemname}-%{version}.gemspec
 
 %changelog
+* Mon Feb 20 2012 Steve Linabery <slinaber@redhat.com> - 0.3.0-8
+- c869cc9 bug 786220 - Scope images to Pool Family
+- ae4a76b Fix accidental version bump, should still be 0.3.0 here.
+- def2a80 Add missing deps, fix summary/description.
+
 * Tue Jan 31 2012 Steve Linabery <slinaber@redhat.com> - 0.3.0-7
 - 920ad8a BZ784879 - do_request consistently raises exceptions
 
