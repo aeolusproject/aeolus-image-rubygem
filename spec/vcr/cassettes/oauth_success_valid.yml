@@ -1,0 +1,30 @@
+--- 
+- !ruby/struct:VCR::HTTPInteraction 
+  request: !ruby/struct:VCR::Request 
+    method: :post
+    uri: http://127.0.0.1:8075/imagefactory/images
+    body: "{\"image\":{\"targets\":\"ec2\",\"template\":\"<template>\\n  <name>f14jeos</name>\\n  <os>\\n    <name>Fedora</name>\\n    <version>14</version>\\n    <arch>x86_64</arch>\\n    <install type='url'>\\n      <url>http://download.fedoraproject.org/pub/fedora/linux/releases/14/Fedora/x86_64/os/</url>\\n    </install>\\n  </os>\\n  <description>Fedora 14</description>\\n</template>\\n\"}}"
+    headers: 
+      user-agent: 
+      - OAuth gem v0.4.4
+      content-type: 
+      - application/json
+      authorization: 
+      - OAuth oauth_body_hash="iLFFmVptnUF4tv9PvDNdNxK%2FSOs%3D", oauth_consumer_key="mock-key", oauth_nonce="dESbWyTyKA0UTHekLdt7DOSOFh6tYU39Mw7LpFkts", oauth_signature="ydhBMjipuQ7ARZT5xfOrvShZfHI%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1318873100", oauth_version="1.0"
+      content-length: 
+      - "365"
+  response: !ruby/struct:VCR::Response 
+    status: !ruby/struct:VCR::ResponseStatus 
+      code: 202
+      message: Accepted
+    headers: 
+      content-type: 
+      - application/json
+      server: 
+      - PasteWSGIServer/0.5 Python/2.7.1
+      date: 
+      - Mon, 17 Oct 2011 17:38:15 GMT
+      content-length: 
+      - "640"
+    body: "{\"_type\": \"image\", \"href\": \"http://127.0.0.1:8075/imagefactory/images/18f1b17e-3fdc-4931-a5d6-f4581e5f5f85\", \"id\": \"18f1b17e-3fdc-4931-a5d6-f4581e5f5f85\", \"build\": {\"target_images\": [{\"_type\": \"target_image\", \"href\": \"http://127.0.0.1:8075/imagefactory/images/18f1b17e-3fdc-4931-a5d6-f4581e5f5f85/builds/6d715c2f-8dc5-46eb-86ad-509366e64252/target_images/dd9c27c5-0bdb-4670-b172-46a3cf2101a6\", \"id\": \"dd9c27c5-0bdb-4670-b172-46a3cf2101a6\"}], \"_type\": \"build\", \"href\": \"http://127.0.0.1:8075/imagefactory/images/18f1b17e-3fdc-4931-a5d6-f4581e5f5f85/builds/6d715c2f-8dc5-46eb-86ad-509366e64252\", \"id\": \"6d715c2f-8dc5-46eb-86ad-509366e64252\"}}"
+    http_version: "1.1"

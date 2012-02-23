@@ -28,6 +28,7 @@ require 'warehouse/provider_image'
 require 'warehouse/template'
 
 RSpec.configure do |config|
+  config.extend VCR::RSpec::Macros
   config.before(:all) do
 #    Aeolus::Image::BaseCommand.class_eval do
 #      def load_config

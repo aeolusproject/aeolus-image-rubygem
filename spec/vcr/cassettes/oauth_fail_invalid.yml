@@ -1,0 +1,30 @@
+--- 
+- !ruby/struct:VCR::HTTPInteraction 
+  request: !ruby/struct:VCR::Request 
+    method: :post
+    uri: http://127.0.0.1:8075/imagefactory/images
+    body: "{\"image\":{\"targets\":\"ec2\",\"template\":\"<template>\\n  <name>f14jeos</name>\\n  <os>\\n    <name>Fedora 2</name>\\n    <version>14</version>\\n    <arch>x86_64</arch>\\n    <install type='url'>\\n      <url>http://download.fedoraproject.org/pub/fedora/linux/releases/14/Fedora/x86_64/os/</url>\\n    </install>\\n  </os>\\n  <description>Fedora 14</description>\\n</template>\\n\"}}"
+    headers: 
+      content-type: 
+      - application/json
+      user-agent: 
+      - OAuth gem v0.4.4
+      authorization: 
+      - OAuth oauth_body_hash="tEAlC3IwCGiB%2FNSQRUOwBifTHmY%3D", oauth_consumer_key="mock-key", oauth_nonce="jeQp5OlYxoCbbflwdM9nfg306BUVfmidPYKV7qPOs", oauth_signature="ERZpwVUR4qdBjfeBTJQtem%2FnKTo%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1318873100", oauth_version="1.0"
+      content-length: 
+      - "367"
+  response: !ruby/struct:VCR::Response 
+    status: !ruby/struct:VCR::ResponseStatus 
+      code: 401
+      message: Unauthorized
+    headers: 
+      content-type: 
+      - text/html; charset=UTF-8
+      date: 
+      - Mon, 17 Oct 2011 17:38:15 GMT
+      server: 
+      - PasteWSGIServer/0.5 Python/2.7.1
+      content-length: 
+      - "0"
+    body: 
+    http_version: "1.1"
