@@ -6,7 +6,7 @@
 Summary: Ruby Client for interacting with Image Warehouse and Image Factory
 Name: rubygem-aeolus-image
 Version: @VERSION@
-Release: 10%{?dist}
+Release: 11%{?dist}
 Group: Development/Languages
 License: ASL 2.0
 URL: http://aeolusproject.org
@@ -56,6 +56,9 @@ rm -rf %{buildroot}%{gemdir}/gems/%{gemname}-%{version}/.yardoc
 %{gemdir}/specifications/%{gemname}-%{version}.gemspec
 
 %changelog
+* Thu Mar 01 2012 Steve Linabery <slinaber@redhat.com> - 0.3.0-11
+- a3bf942 BZ 795743 - Image.import supports setting architecture
+
 * Thu Feb 23 2012 Steve Linabery <slinaber@redhat.com> - 0.3.0-10
 - 4b98ece Bug 796783: fixes lingering errors w/ image import
 - 5c1dcce Resolve VCR problem with matching  requests
