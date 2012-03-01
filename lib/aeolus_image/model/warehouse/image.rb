@@ -120,6 +120,10 @@ module Aeolus
           xml.present? ? xml.xpath(path).text : ""
         end
 
+        def architecture
+          @architecture || os.arch
+        end
+
         class << self
           def by_environment(environment)
             self.where("($environment == \"" + environment + "\")")

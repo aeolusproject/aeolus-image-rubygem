@@ -14,7 +14,7 @@
 
 module Aeolus
   module Image
-    def self.import(provider_name, deltacloud_driver, image_id, account_id, environment, xml=nil)
+    def self.import(provider_name, deltacloud_driver, image_id, account_id, environment, xml=nil, arch=nil)
       xml ||= "<image><name>#{image_id}</name></image>"
       image = Factory::Image.new(
         :target_name => deltacloud_driver,
@@ -26,7 +26,9 @@ module Aeolus
       # Set the provider_account_id on the image
       iwhd_image = Warehouse::Image.find(image.id)
       iwhd_image.set_attr("environment", environment)
-     # Set the account on the provider image
+      # For imported images, stash an :architecture flag on the image itself since we have no template
+      iwhd_image.set_attr(:architecture, arch) if arch
+      # Set the account on the provider image
       # This assumes (as is currently correct) that there will only be one provider image for imported images
       pimg = iwhd_image.provider_images.first
       pimg.set_attr('provider_account_identifier', account_id)
