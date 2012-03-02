@@ -31,8 +31,14 @@ module Aeolus
       # Set the account on the provider image
       # This assumes (as is currently correct) that there will only be one provider image for imported images
       pimg = iwhd_image.provider_images.first
-      pimg.set_attr('provider_account_identifier', account_id)
-      image
+      # Check that we have provider images! If not, the import has failed.
+      if pimg
+        pimg.set_attr('provider_account_identifier', account_id)
+        return image
+      else
+        iwhd_image.delete!
+        raise "Image import failed to import provider image! Aborting."
+      end
     end
   end
 end
