@@ -40,7 +40,7 @@ module Aeolus
           return false unless instance_variables.sort == other_obj.instance_variables.sort
           # Otherwise, ensure that they're all the same
           instance_variables.each do |iv|
-            next if iv == "@obj"
+            next if iv == "@obj" || iv == :@obj
             return false unless other_obj.instance_variable_get(iv) == instance_variable_get(iv)
             return false unless other_obj.body == body
           end

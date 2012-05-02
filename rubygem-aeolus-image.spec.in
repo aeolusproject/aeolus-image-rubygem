@@ -1,7 +1,12 @@
 %global gemdir %(ruby -rubygems -e 'puts Gem::dir' 2>/dev/null)
 %global gemname aeolus-image
 %global geminstdir %{gemdir}/gems/%{gemname}-%{version}
+%if 0%{?fedora} > 16
+%global rubyabi 1.9.1
+%else
 %global rubyabi 1.8
+%endif
+
 
 Summary: Ruby Client for interacting with Image Warehouse and Image Factory
 Name: rubygem-aeolus-image
@@ -18,9 +23,6 @@ Requires: rubygems
 Requires: rubygem(nokogiri) >= 1.4.0
 Requires: rubygem(rest-client)
 Requires: rubygem(oauth)
-Requires: rubygem(vcr)
-Requires: rubygem(webmock)
-Requires: rubygem(timecop)
 
 BuildRequires: ruby
 BuildRequires: rubygems
@@ -56,6 +58,9 @@ rm -rf %{buildroot}%{gemdir}/gems/%{gemname}-%{version}/.yardoc
 %{gemdir}/specifications/%{gemname}-%{version}.gemspec
 
 %changelog
+* Wed Feb 15 2012 Mo Morsi <mmorsi@redhat.com> - 0.3.0-3
+- updated to ruby 1.9
+
 * Mon Jan 09 2012 Steve Linabery <slinaber@redhat.com> - 0.3.0-2
 - d0624e1 Add provider_account-filtered 'provider images' method to build model
 - 8108b42 Remove extra_release from spec.in

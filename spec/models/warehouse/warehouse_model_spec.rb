@@ -38,7 +38,7 @@ module Aeolus
           context "when other object has the same instance variables list" do
             context "with the same values" do
               let(:other_warehouse_attributes) { @warehouse_model_attributes }
-              it { subject.==(other_warehouse_model).should be_true }
+              it { subject.should == other_warehouse_model }
             end
 
             context "with different values" do
