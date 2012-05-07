@@ -1,10 +1,14 @@
+%if 0%{?fedora} > 16
+%global rubyabi 1.9.1
+%global gem_name aeolus-image
+%global gemname %{gem_name}
+%global geminstdir %{gem_instdir}
+%global gemdir %{gem_dir}
+%else
+%global rubyabi 1.8
 %global gemdir %(ruby -rubygems -e 'puts Gem::dir' 2>/dev/null)
 %global gemname aeolus-image
 %global geminstdir %{gemdir}/gems/%{gemname}-%{version}
-%if 0%{?fedora} > 16
-%global rubyabi 1.9.1
-%else
-%global rubyabi 1.8
 %endif
 
 
@@ -26,6 +30,10 @@ Requires: rubygem(oauth)
 
 BuildRequires: ruby
 BuildRequires: rubygems
+
+%if 0%{?fedora} > 16
+BuildRequires: rubygems-devel
+%endif
 
 BuildArch: noarch
 Provides: rubygem(%{gemname}) = %{version}
@@ -58,8 +66,12 @@ rm -rf %{buildroot}%{gemdir}/gems/%{gemname}-%{version}/.yardoc
 %{gemdir}/specifications/%{gemname}-%{version}.gemspec
 
 %changelog
-* Wed Feb 15 2012 Mo Morsi <mmorsi@redhat.com> - 0.3.0-3
+* Mon May 07 2012 Mo Morsi <mmorsi@redhat.com> - 0.4.0-2
+- fixed spec to use new ruby 1.9 macros
+
+* Mon May 07 2012 Mo Morsi <mmorsi@redhat.com> - 0.4.0-1
 - updated to ruby 1.9
+- new upstream release
 
 * Mon Jan 09 2012 Steve Linabery <slinaber@redhat.com> - 0.3.0-2
 - d0624e1 Add provider_account-filtered 'provider images' method to build model
