@@ -26,7 +26,7 @@ module ActiveResourceOAuthClient
     def request_with_oauth(method, path, *arguments)
       @oauth_config = Aeolus::Image::Factory::Base.config || {}
       # Take care to fall back to the standard request method if we don't have full OAuth credentials
-      unless Aeolus::Image::Factory::Base.use_oauth?
+      unless use_oauth_for_url?("#{site.scheme}://#{site.host}:#{site.port}#{path}")
         return request_without_oauth(method, path, *arguments)
       end
       result = ActiveSupport::Notifications.instrument("request.active_resource") do |payload|
@@ -54,6 +54,12 @@ module ActiveResourceOAuthClient
         raise TimeoutError.new(e.message)
       rescue OpenSSL::SSL::SSLError => e
         raise SSLError.new(e.message)
+    end
+
+    # Currently, only Factory calls should use OAuth -- extend as needed
+    def use_oauth_for_url?(url)
+      Aeolus::Image::Factory::Base.use_oauth? and
+        url.include?(Aeolus::Image::Factory::Base.config[:site])
     end
 
     alias_method_chain :request, :oauth
