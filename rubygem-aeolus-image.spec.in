@@ -15,7 +15,7 @@
 Summary: Ruby Client for interacting with Image Warehouse and Image Factory
 Name: rubygem-aeolus-image
 Version: @VERSION@
-Release: 0%{?dist}
+Release: 1%{?dist}
 Group: Development/Languages
 License: ASL 2.0
 URL: http://aeolusproject.org
@@ -66,6 +66,9 @@ rm -rf %{buildroot}%{gemdir}/gems/%{gemname}-%{version}/.yardoc
 %{gemdir}/specifications/%{gemname}-%{version}.gemspec
 
 %changelog
+* Wed Jun 06 2012 Steve Linabery <slinaber@redhat.com> - 0.5.0-1
+- 9144549 OAuth only binds to Factory requests
+
 * Mon May 07 2012 Mo Morsi <mmorsi@redhat.com> - 0.4.0-2
 - fixed spec to use new ruby 1.9 macros
 
