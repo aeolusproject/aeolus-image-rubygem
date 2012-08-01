@@ -15,7 +15,7 @@
 Summary: Ruby Client for interacting with Image Warehouse and Image Factory
 Name: rubygem-aeolus-image
 Version: @VERSION@
-Release: 0%{?dist}
+Release: 1%{?dist}
 Group: Development/Languages
 License: ASL 2.0
 URL: http://aeolusproject.org
