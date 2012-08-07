@@ -57,15 +57,22 @@ rm -rf %{buildroot}%{gemdir}/gems/%{gemname}-%{version}/.yardoc
 
 %files
 %doc %{geminstdir}/COPYING
+%doc %{geminstdir}/README.md
 %doc %{gemdir}/doc/%{gemname}-%{version}
 %dir %{geminstdir}
 %{geminstdir}/Rakefile
 %{geminstdir}/lib
+%{geminstdir}/rake/rpmtask.rb
+%{geminstdir}/.rspec
 %{geminstdir}/spec
+%{geminstdir}/examples
 %{gemdir}/cache/%{gemname}-%{version}.gem
 %{gemdir}/specifications/%{gemname}-%{version}.gemspec
 
 %changelog
+* Tue Aug 07 2012 Steve Linabery <slinaber@redhat.com> - 0.5.1-1
+- clean up gemspec
+
 * Wed Jun 06 2012 Steve Linabery <slinaber@redhat.com> - 0.5.0-1
 - 9144549 OAuth only binds to Factory requests
 
