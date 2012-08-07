@@ -1,19 +1,21 @@
 Gem::Specification.new do |s|
-  s.name        = "aeolus-image"
-  s.version     = "0.5.0"
-  s.platform    = Gem::Platform::RUBY
-  s.authors     = ["Red Hat Inc."]
-  s.email       = ["aeolus-devel@lists.fedorahosted.org"]
-  s.homepage    = "https://github.com/aeolusproject/aeolus-image-rubygem"
-  s.summary     = "Ruby library used by Conductor"
-  s.description = "aeolus-image-rubygem is a Ruby library used by Conductor to connect with Image Factory and Image Warehouse."
+  s.name         = "aeolus-image"
+  s.version      = "0.6.0"
+  s.platform     = Gem::Platform::RUBY
+  s.authors      = ["Jason Guiditta, Martyn Taylor"]
+  s.email        = ["jguiditt@redhat.com, mtaylor@redhat.com"]
+  s.license      = "ASL 2.0"
+  s.homepage     = "https://github.com/aeolusproject/aeolus-image-rubygem"
+  s.summary      = "Ruby Client for Image Warehouse and Image Factory for the Aeolus cloud suite"
+  s.description  = "aeolus-image is a Ruby library used by Conductor to connect with Image Factory and Image Warehouse."
 
-  s.add_dependency "oauth"
-  s.add_dependency "activeresource"
-  s.add_dependency "rest-client"
-  s.add_dependency "nokogiri"
-
-  # If you need to check in files that aren't .rb files, add them here
-  s.files        = Dir["{lib}/**/*.rb", "COPYING", "*.md"]
+  s.files        = Dir["lib/**/*.rb","README.md","COPYING","Rakefile","rake/rpmtask.rb"]
+  s.test_files   = Dir["spec/**/*.*",".rspec","examples/aeolus-cli"]
   s.require_path = 'lib'
+  s.add_dependency "activeresource"
+  s.add_dependency "nokogiri"
+  s.add_dependency "oauth"
+  s.add_dependency "rest-client"
+
+  s.add_development_dependency('rspec', '>=1.3.0')
 end

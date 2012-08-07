@@ -57,11 +57,15 @@ rm -rf %{buildroot}%{gemdir}/gems/%{gemname}-%{version}/.yardoc
 
 %files
 %doc %{geminstdir}/COPYING
+%doc %{geminstdir}/README.md
 %doc %{gemdir}/doc/%{gemname}-%{version}
 %dir %{geminstdir}
 %{geminstdir}/Rakefile
 %{geminstdir}/lib
+%{geminstdir}/rake/rpmtask.rb
+%{geminstdir}/.rspec
 %{geminstdir}/spec
+%{geminstdir}/examples
 %{gemdir}/cache/%{gemname}-%{version}.gem
 %{gemdir}/specifications/%{gemname}-%{version}.gemspec
 
