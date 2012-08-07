@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = "aeolus-image"
-  s.version     = "0.3.0"
+  s.version     = "0.5.0"
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Red Hat Inc."]
   s.email       = ["aeolus-devel@lists.fedorahosted.org"]
