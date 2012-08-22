@@ -69,6 +69,18 @@ module Aeolus
           end
         end
 
+        def initialize(attributes = {}, persisted = nil)
+          # The !! operator is required to set modified_persisted to false when
+          # persisted == nil && attributes[:id] == nil
+          modified_persisted = (persisted.nil? && attributes[:id]) ? true : !!persisted
+
+          if ActiveResource::VERSION::MAJOR >= 3 && ActiveResource::VERSION::MINOR >= 1
+            super(attributes, modified_persisted)
+          else
+            super(attributes)
+          end
+        end
+
         ## Instance Methods: (modifying the ActiveRecord::CustomMethods).
         ## This modification is same as defined in above method
         def get(method_name, options = {})
