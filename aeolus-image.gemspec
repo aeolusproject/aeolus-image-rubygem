@@ -18,4 +18,8 @@ Gem::Specification.new do |s|
   s.add_dependency "rest-client"
 
   s.add_development_dependency('rspec', '>=1.3.0')
+  s.add_development_dependency('rake')
+  s.add_development_dependency('vcr', '~> 1.11')
+  s.add_development_dependency('webmock')
+  s.add_development_dependency('timecop')
 end
