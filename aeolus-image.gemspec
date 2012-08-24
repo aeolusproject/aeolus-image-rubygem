@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.add_dependency "activeresource"
   s.add_dependency "nokogiri"
-  s.add_dependency "oauth"
+  s.add_dependency "oauth", "0.4.4"
   s.add_dependency "rest-client"
 
   s.add_development_dependency('rspec', '>=1.3.0')
