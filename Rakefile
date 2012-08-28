@@ -19,13 +19,8 @@ require 'rubygems/package_task'
 require 'rdoc/task'
 require 'rake/testtask'
 require 'rspec/core/rake_task'
-require './rake/rpmtask'
 
-RPMBUILD_DIR = "#{File.expand_path('~')}/rpmbuild"
-RPM_SPEC = "rubygem-aeolus-image.spec"
-RPM_SPEC_IN = "rubygem-aeolus-image.spec.in"
 PKG_VERSION = "0.6.0"
-
 spec = eval(File.read('aeolus-image.gemspec'))
 
 Gem::PackageTask.new(spec) do |p|
@@ -51,8 +46,14 @@ RSpec::Core::RakeTask.new do |t|
   t.pattern = FileList['spec/**/*.rb']
 end
 
-Rake::RpmTask.new(RPM_SPEC, {:suffix => '.in', :pkg_version => PKG_VERSION}) do |rpm|
-  rpm.need_tar = true
-  rpm.package_files.include("lib/*")
-  rpm.topdir = "#{RPMBUILD_DIR}"
+if File.exist?('/etc/rpm/macros.dist')
+  require './rake/rpmtask'
+  RPMBUILD_DIR = "#{File.expand_path('~')}/rpmbuild"
+  RPM_SPEC = "rubygem-aeolus-image.spec"
+  RPM_SPEC_IN = "rubygem-aeolus-image.spec.in"
+  Rake::RpmTask.new(RPM_SPEC, {:suffix => '.in', :pkg_version => PKG_VERSION}) do |rpm|
+    rpm.need_tar = true
+    rpm.package_files.include("lib/*")
+    rpm.topdir = "#{RPMBUILD_DIR}"
+  end
 end
