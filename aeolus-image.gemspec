@@ -22,4 +22,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency('vcr', '~> 1.11')
   s.add_development_dependency('webmock')
   s.add_development_dependency('timecop')
+  s.add_development_dependency('rdoc', '>=3.8.0')
 end
