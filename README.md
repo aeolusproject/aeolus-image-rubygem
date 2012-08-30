@@ -1,3 +1,6 @@
+[![Build
+Status](https://secure.travis-ci.org/aeolusproject/aeolus-image-rubygem.png)](http://travis-ci.org/aeolusproject/aeolus-image-rubygem)
+
 # aeolus-image-rubygem #
 **aeolus-image-rubygem** is a Ruby library used by [Conductor](https://github.com/aeolusproject/conductor) to connect with Image Factory and Image Warehouse.
 
