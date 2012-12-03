@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name         = "aeolus-image"
-  s.version      = "0.6.0"
+  s.version      = "0.7.0"
   s.platform     = Gem::Platform::RUBY
   s.authors      = ["Jason Guiditta, Martyn Taylor"]
   s.email        = ["jguiditt@redhat.com, mtaylor@redhat.com"]
