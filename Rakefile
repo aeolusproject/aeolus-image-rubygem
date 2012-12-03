@@ -20,7 +20,7 @@ require 'rdoc/task'
 require 'rake/testtask'
 require 'rspec/core/rake_task'
 
-PKG_VERSION = "0.6.0"
+PKG_VERSION = "0.7.0"
 spec = eval(File.read('aeolus-image.gemspec'))
 
 Gem::PackageTask.new(spec) do |p|
